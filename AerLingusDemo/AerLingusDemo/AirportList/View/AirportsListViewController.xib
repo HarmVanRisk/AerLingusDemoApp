@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AirportsListViewController" customModule="AerLingusDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="airportListTable" destination="Xbu-CG-Rls" id="Dhl-rO-bz7"/>
+                <outlet property="airportSearch" destination="Sg9-bE-xUQ" id="Auq-Mq-E3B"/>
+                <outlet property="searchDisplayController" destination="kqV-Ym-iye" id="pbM-Ar-YfG"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4D-wh-ziT">
+                    <rect key="frame" x="11" y="44" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Ojj-pq-OO0"/>
+                        <constraint firstAttribute="width" constant="40" id="had-1o-5hq"/>
+                    </constraints>
+                    <state key="normal" image="CloseCross"/>
+                    <connections>
+                        <action selector="closeAirportList:" destination="-1" eventType="touchUpInside" id="L7W-PP-oZ7"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xbu-CG-Rls">
+                    <rect key="frame" x="0.0" y="142" width="414" height="720"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search airports" translatesAutoresizingMaskIntoConstraints="NO" id="Sg9-bE-xUQ">
+                    <rect key="frame" x="0.0" y="86" width="414" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="aKR-hF-YX5"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="K8T-4T-TYB"/>
+                    </connections>
+                </searchBar>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Xbu-CG-Rls" secondAttribute="bottom" id="8WI-X8-rdi"/>
+                <constraint firstItem="Sg9-bE-xUQ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="42" id="BRw-05-o2p"/>
+                <constraint firstItem="Xbu-CG-Rls" firstAttribute="top" secondItem="Sg9-bE-xUQ" secondAttribute="bottom" id="Rc0-3m-0QR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="U4D-wh-ziT" secondAttribute="bottom" constant="-40" id="UEY-nf-dan"/>
+                <constraint firstItem="U4D-wh-ziT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="11" id="Unx-Lc-fES"/>
+                <constraint firstItem="Sg9-bE-xUQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cqU-HZ-w1Y"/>
+                <constraint firstItem="Xbu-CG-Rls" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="juK-MW-sRy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Xbu-CG-Rls" secondAttribute="trailing" id="r4I-ox-GjP"/>
+                <constraint firstItem="Sg9-bE-xUQ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="vd2-WO-dpR"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="-210.1449275362319" y="6.6964285714285712"/>
+        </view>
+        <searchDisplayController id="kqV-Ym-iye">
+            <connections>
+                <outlet property="delegate" destination="-1" id="u85-Xg-lqq"/>
+                <outlet property="searchBar" destination="Sg9-bE-xUQ" id="w8G-Uo-5Gq"/>
+                <outlet property="searchContentsController" destination="-1" id="aJF-Yl-haA"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="n9H-GI-UHM"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="fbC-Bv-jPv"/>
+            </connections>
+        </searchDisplayController>
+    </objects>
+    <resources>
+        <image name="CloseCross" width="75" height="75"/>
+    </resources>
+</document>

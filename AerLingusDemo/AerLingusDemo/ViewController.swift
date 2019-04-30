@@ -8,24 +8,51 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController,AerLingusDemoViewProtocol {
+    @IBOutlet weak var fromToAirportsContainer: UIView!
+    @IBOutlet weak var fromAirportContainer: UIView!
+    @IBOutlet weak var fromAirport: UILabel!
+    @IBOutlet weak var toAirportContainer: UIView!
+    @IBOutlet weak var toAirport: UILabel!
+    var presenter: AerLingusDemoPresenterProtocol?
+    var baseAirport: Airport?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let allAirportDetails : AllAirportDetails
-        if let filePath = Bundle.main.path(forResource: "AirportDetails", ofType: "json") {
-            do {
-                let fileURL = URL(fileURLWithPath: filePath);
-                let allAirportData = try Data(contentsOf: fileURL)//, options:.mappedIfSafe)
-                let detailsSelf = AllAirportDetails.self
-                allAirportDetails = try JSONDecoder().decode(detailsSelf, from: allAirportData)
-                print(allAirportDetails.businessFares!)
-            } catch {
-                print("error")
-            }
-        }
+        let fromTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(loadFromAirportSelectionView))
+        let toTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(loadToAirportSelectionView))
+        fromAirportContainer.addGestureRecognizer(fromTapGestureRecognizer)
+        toAirportContainer.addGestureRecognizer(toTapGestureRecognizer)
+        AerLingusDemoRouter.createAerLingusDemoModule(demoRef: self)
+        presenter?.viewDidLoad()
     }
-
-
+    
+    @objc func loadFromAirportSelectionView() {
+        presenter?.showAirportsList(with: nil, from: self, addAirportDelegate: presenter)
+    }
+    
+    @objc func loadToAirportSelectionView() {
+        presenter?.showAirportsList(with: baseAirport, from: self, addAirportDelegate: presenter)
+    }
+    
+    func updateFromAirport(airport: Airport?) {
+        guard let baseAirport = airport else {
+            fromAirport.text = "Please select a From Airport"
+            return
+        }
+        self.baseAirport = baseAirport
+        fromAirport.text = "\(baseAirport.name)(\(baseAirport.code))"
+        //Reset the toAirport info
+        toAirport.text = "Please select a To Airport"
+    }
+    
+    func updateToAirport(airport: Airport?) {
+        guard let arrivalAirport = airport else {
+            toAirport.text = "Please select a To Airport"
+            return
+        }
+        toAirport.text = "\(arrivalAirport.name)(\(arrivalAirport.code))"
+    }
+    
 }
 
